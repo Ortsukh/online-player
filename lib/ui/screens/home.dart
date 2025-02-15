@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final blocks = <Widget>[
           if (overviewProvider.mostPlayedSongs.isNotEmpty)
             HorizontalCardScroller(
-              headingText: 'Most played songs',
+              headingText: 'Populâr',
               cards: <Widget>[
                 ...overviewProvider.mostPlayedSongs
                     .map((song) => SongCard(song: song as Song)),
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         CupertinoSliverNavigationBar(
                           backgroundColor:
                               AppColors.staticScreenHeaderBackground,
-                          largeTitle: const LargeTitle(text: 'Home'),
+                          largeTitle: const LargeTitle(text: 'Baş saife'),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

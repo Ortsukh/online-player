@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return const Padding(
       padding: EdgeInsets.only(left: AppDimensions.hPadding),
       child: Text(
-        'None found.',
+        'Tapılmadı.',
         style: TextStyle(color: Colors.white54),
       ),
     );
@@ -87,7 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 color: Colors.white10,
                 borderRadius: AppDimensions.inputBorderRadius,
               ),
-              placeholder: 'Search your library',
+              placeholder: 'Arama',
               onChanged: _search,
               onSuffixTap: _resetSearch,
             ),
@@ -103,7 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   _focusNode.unfocus();
                 },
                 child: Text(
-                  'Cancel',
+                  'Red etmek',
                   style: TextStyle(color: AppColors.white.withOpacity(.7)),
                 ),
               ),

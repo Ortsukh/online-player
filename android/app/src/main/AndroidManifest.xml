@@ -2,8 +2,8 @@
     package="phanan.koel.app">
 
     <application
-        android:label="Koel"
-        android:icon="@mipmap/ic_launcher"
+        android:label="Qırım Life"
+        android:icon="@mipmap/ic_launcher_new_foreground"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

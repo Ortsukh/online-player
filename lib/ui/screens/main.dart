@@ -101,15 +101,15 @@ class _MainScreenState extends State<MainScreen> {
                       border: Border(top: Divider.createBorderSide(context)),
                       items: <BottomNavigationBarItem>[
                         tabBarItem(
-                          title: 'Home',
+                          title: 'Baş saife',
                           icon: CupertinoIcons.house_fill,
                         ),
                         tabBarItem(
-                          title: 'Search',
+                          title: 'Arama',
                           icon: CupertinoIcons.search,
                         ),
                         tabBarItem(
-                          title: 'Library',
+                          title: 'Katalog',
                           icon: CupertinoIcons.music_albums_fill,
                         ),
                       ],
@@ -182,7 +182,7 @@ class _ConnectivityInfoBoxState extends State<ConnectivityInfoBox>
                         size: 20,
                       ),
                       const Text(
-                        'No internet connection',
+                        'Internet yoq',
                         style: TextStyle(color: Colors.white54),
                       ),
                     ]),
@@ -207,7 +207,7 @@ class _ConnectivityInfoBoxState extends State<ConnectivityInfoBox>
                     size: 20,
                   ),
                   label: const Text(
-                    'Connection restored! Tap to refresh.',
+                    'Internet çalışa. Basıñız.',
                     style: TextStyle(color: AppColors.white, fontSize: 14.0),
                   ),
                 ),

@@ -93,7 +93,7 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
               children: <Widget>[
                 if (!isCurrent)
                   PlayableActionButton(
-                    text: 'Play Next',
+                    text: 'Nevbetteki',
                     icon: const Icon(
                       CupertinoIcons.arrow_right_circle_fill,
                       color: Colors.white30,
@@ -104,13 +104,13 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                         context,
                         icon: CupertinoIcons.arrow_right_circle_fill,
                         caption: 'Queued',
-                        message: 'To be played next.',
+                        message: 'Nevbetteki.',
                       );
                     },
                   ),
                 if (!isCurrent)
                   PlayableActionButton(
-                    text: 'Play Last',
+                    text: 'Soñ',
                     icon: const Icon(
                       CupertinoIcons.arrow_down_right_circle_fill,
                       color: Colors.white30,
@@ -121,13 +121,13 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                         context,
                         icon: CupertinoIcons.arrow_down_right_circle_fill,
                         caption: 'Queued',
-                        message: 'Queued to bottom.',
+                        message: 'Soñ.',
                       );
                     },
                   ),
                 if (_queued)
                   PlayableActionButton(
-                    text: 'Remove from Queue',
+                    text: 'Cedvelden silmek',
                     icon: const Icon(
                       CupertinoIcons.text_badge_minus,
                       color: Colors.white30,
@@ -138,15 +138,15 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                         context,
                         icon: CupertinoIcons.text_badge_minus,
                         caption: 'Removed',
-                        message: 'Removed from queue.',
+                        message: 'Cedvelden silmek.',
                       );
                     },
                   ),
                 PlayableActionButton(
                   enabled: !inOfflineMode,
                   text: playable.liked
-                      ? 'Remove as Favorite'
-                      : 'Mark as Favorite',
+                      ? 'Sevimliden silmek'
+                      : 'Sevimlige',
                   icon: Icon(
                     playable.liked
                         ? CupertinoIcons.heart_fill
@@ -158,8 +158,8 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                       context,
                       caption: playable.liked ? 'Unliked' : 'Liked',
                       message: playable.liked
-                          ? 'Removed from Favorites.'
-                          : 'Added to Favorites.',
+                          ? 'Cedvelden silmek.'
+                          : 'Qoşmaq silmek.',
                       icon: playable.liked
                           ? CupertinoIcons.heart_slash
                           : CupertinoIcons.heart_fill,
@@ -171,7 +171,7 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                 if (playable is Song)
                   PlayableActionButton(
                     enabled: !inOfflineMode,
-                    text: 'Go to Album',
+                    text: 'Albom',
                     icon: const Icon(
                       CupertinoIcons.music_albums_fill,
                       color: Colors.white30,
@@ -185,27 +185,27 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                     },
                     hideSheetOnTap: false,
                   ),
-                if (playable is Episode)
-                  PlayableActionButton(
-                    enabled: !inOfflineMode,
-                    text: 'Go to Podcast',
-                    icon: const Icon(
-                      LucideIcons.podcast,
-                      color: Colors.white30,
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      AppRouter().gotoPodcastDetailsScreen(
-                        context,
-                        podcastId: playable.podcastId,
-                      );
-                    },
-                    hideSheetOnTap: false,
-                  ),
+                // if (playable is Episode)
+                //   PlayableActionButton(
+                //     enabled: !inOfflineMode,
+                //     text: 'Go to Podcast',
+                //     icon: const Icon(
+                //       LucideIcons.podcast,
+                //       color: Colors.white30,
+                //     ),
+                //     onTap: () {
+                //       Navigator.pop(context);
+                //       AppRouter().gotoPodcastDetailsScreen(
+                //         context,
+                //         podcastId: playable.podcastId,
+                //       );
+                //     },
+                //     hideSheetOnTap: false,
+                //   ),
                 if (playable is Song)
                   PlayableActionButton(
                     enabled: !inOfflineMode,
-                    text: 'Go to Artist',
+                    text: 'Yırcı',
                     icon: const Icon(
                       CupertinoIcons.music_mic,
                       color: Colors.white30,
@@ -222,7 +222,7 @@ class _PlayableActionSheetState extends State<PlayableActionSheet> {
                 const Divider(indent: 16, endIndent: 16),
                 PlayableActionButton(
                   enabled: !inOfflineMode,
-                  text: 'Add to a Playlist…',
+                  text: 'Pleylistke qoşmaq…',
                   icon: const Icon(
                     CupertinoIcons.text_badge_plus,
                     color: Colors.white30,

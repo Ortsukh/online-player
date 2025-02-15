@@ -102,7 +102,7 @@ class _PlaylistsScreenState extends State<PlaylistsScreen> {
             },
             child: CupertinoSliverNavigationBar(
               backgroundColor: AppColors.staticScreenHeaderBackground,
-              largeTitle: const LargeTitle(text: 'Playlists'),
+              largeTitle: const LargeTitle(text: 'Pleylistler'),
               trailing: IconButton(
                 onPressed: () => widget.router.showCreatePlaylistSheet(context),
                 icon: const Icon(CupertinoIcons.add_circled),
@@ -126,7 +126,7 @@ class _PlaylistsScreenState extends State<PlaylistsScreen> {
             textAlign: TextAlign.center,
             text: TextSpan(
               children: <InlineSpan>[
-                const TextSpan(text: 'Delete the playlist '),
+                const TextSpan(text: 'Pleylistnı silmek '),
                 TextSpan(
                   text: playlist.name,
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -135,14 +135,14 @@ class _PlaylistsScreenState extends State<PlaylistsScreen> {
               ],
             ),
           ),
-          content: const Text('You cannot undo this action.'),
+          content: const Text('Yapılmay.'),
           actions: <Widget>[
             CupertinoDialogAction(
-              child: const Text('Cancel'),
+              child: const Text('Red etmek'),
               onPressed: () => Navigator.pop(context, false),
             ),
             CupertinoDialogAction(
-              child: const Text('Confirm'),
+              child: const Text('Yapmaq'),
               isDestructiveAction: true,
               onPressed: () => Navigator.pop(context, true),
             ),
@@ -172,8 +172,8 @@ class NoPlaylistsScreen extends StatelessWidget {
             CupertinoIcons.exclamationmark_square,
             size: 56.0,
           ),
-          const Text('You have no playlists in your library.'),
-          ElevatedButton(onPressed: onTap, child: Text('Create Playlist')),
+          const Text('Katalokta pleylist yoq.'),
+          ElevatedButton(onPressed: onTap, child: Text('Yañı pleylistnı yapmaq')),
         ],
       ),
     );

@@ -24,50 +24,50 @@ class LibraryScreen extends StatelessWidget {
       tiles: <Widget>[
         LibraryMenuItem(
           icon: CupertinoIcons.music_note,
-          label: 'Songs',
+          label: 'Yırlar',
           onTap: () => Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => const SongsScreen()),
           ),
         ),
         LibraryMenuItem(
           icon: CupertinoIcons.heart_fill,
-          label: 'Favorites',
+          label: 'Yırcılar',
           onTap: () => Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => const FavoritesScreen()),
           ),
         ),
         LibraryMenuItem(
           icon: CupertinoIcons.music_note_list,
-          label: 'Playlists',
+          label: 'Pleylistler',
           onTap: () => Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => const PlaylistsScreen()),
           ),
         ),
         LibraryMenuItem(
           icon: CupertinoIcons.music_mic,
-          label: 'Artists',
+          label: 'Yırcı',
           onTap: () => Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => const ArtistsScreen()),
           ),
         ),
         LibraryMenuItem(
           icon: CupertinoIcons.music_albums,
-          label: 'Albums',
+          label: 'Albomlar',
           onTap: () => Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => const AlbumsScreen()),
           ),
         ),
-        if (Feature.podcasts.isSupported())
-          LibraryMenuItem(
-            icon: LucideIcons.podcast,
-            label: 'Podcasts',
-            onTap: () => Navigator.of(context).push(
-              CupertinoPageRoute(builder: (_) => const PodcastsScreen()),
-            ),
-          ),
+        // if (Feature.podcasts.isSupported())
+        //   LibraryMenuItem(
+        //     icon: LucideIcons.podcast,
+        //     label: 'Podcasts',
+        //     onTap: () => Navigator.of(context).push(
+        //       CupertinoPageRoute(builder: (_) => const PodcastsScreen()),
+        //     ),
+        //   ),
         LibraryMenuItem(
           icon: CupertinoIcons.cloud_download_fill,
-          label: 'Downloaded',
+          label: 'Fayllar',
           onTap: () => Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => DownloadedScreen()),
           ),
@@ -83,7 +83,7 @@ class LibraryScreen extends StatelessWidget {
             slivers: <Widget>[
               const CupertinoSliverNavigationBar(
                 backgroundColor: AppColors.staticScreenHeaderBackground,
-                largeTitle: const LargeTitle(text: 'Library'),
+                largeTitle: const LargeTitle(text: 'Katalog'),
               ),
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
@@ -99,7 +99,7 @@ class LibraryScreen extends StatelessWidget {
                   0,
                 ),
                 sliver: SliverToBoxAdapter(
-                  child: const Heading5(text: 'Recently added'),
+                  child: const Heading5(text: 'Soñki qoşulğan'),
                 ),
               ),
               recentlyAddedSongs.isEmpty
@@ -113,7 +113,7 @@ class LibraryScreen extends StatelessWidget {
                   0,
                 ),
                 sliver: SliverToBoxAdapter(
-                  child: const Heading5(text: 'Most played'),
+                  child: const Heading5(text: 'Populâr'),
                 ),
               ),
               mostPlayedSongs.isEmpty

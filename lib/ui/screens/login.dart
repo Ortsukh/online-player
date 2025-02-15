@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -37,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
 
     // Try looking for stored values in local storage
     setState(() {
-      _host = preferences.host ?? '';
+      _host = 'https://Qirim.azatdev.ru';
       _email = preferences.userEmail ?? '';
     });
   }
@@ -118,6 +119,26 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
     }
   }
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: ['email'],  // Укажите необходимые scopes
+);
+Future<void> _signInWithGoogle() async {
+  try {
+    final GoogleSignInAccount? account = await _googleSignIn.signIn();
+    if (account != null) {
+      print("User signed in: ${account.displayName}");
+      print("Email: ${account.email}");
+      print("Photo URL: ${account.photoUrl}");
+
+      // Здесь можно добавить логику для обработки успешной авторизации
+      // Например, отправить данные на сервер или сохранить в локальном хранилище
+      redirectToDataLoadingScreen();
+    }
+  } catch (error) {
+    print("Error signing in with Google: $error");
+    await showErrorDialog(context, message: "Failed to sign in with Google.");
+  }
+}
   Future<void> attemptLoginWithOtp({
     required String host,
     required String token,
@@ -166,19 +187,19 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   ...[
-                    Image.asset('assets/images/logo.png', width: 160),
-                    TextFormField(
-                      keyboardType: TextInputType.url,
-                      autocorrect: false,
-                      onChanged: (value) => _host = value,
-                      onSaved: (value) => _host = value ?? '',
-                      decoration: InputDecoration(
-                        labelText: 'Host',
-                        hintText: 'https://www.koel.music',
-                      ),
-                      controller: TextEditingController(text: _host),
-                      validator: requireValue,
-                    ),
+                    Image.asset('assets/images/logoNew.png', width: 160),
+                    // TextFormField(
+                    //   keyboardType: TextInputType.url,
+                    //   autocorrect: false,
+                    //   onChanged: (value) => _host = value,
+                    //   onSaved: (value) => _host = value ?? '',
+                    //   decoration: InputDecoration(
+                    //     labelText: 'Host',
+                    //     hintText: 'https://www.koel.music',
+                    //   ),
+                    //   controller: TextEditingController(text: _host),
+                    //   validator: requireValue,
+                    // ),
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       autocorrect: false,
@@ -197,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
                       onChanged: (value) => _password = value,
                       onSaved: (value) => _password = value ?? '',
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        labelText: 'Parol',
                         suffixIcon: IconButton(
                           icon: Icon(
                             _showPassword
@@ -219,10 +240,29 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
                                 color: Colors.white,
                                 size: 16,
                               )
-                            : const Text('Log In'),
+                            : const Text('Kirmek'),
                         onPressed: _authenticating ? null : attemptLogin,
                       ),
                     ),
+                   SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                    
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/logo_google.png',  
+                            width: 24,
+                            height: 24,
+                          ),
+                          SizedBox(width: 8),
+                          Text('Google ile kirmek'),
+                        ],
+                      ),
+                      onPressed: _authenticating ? null : _signInWithGoogle,
+                    ),
+                  ),
                     _authenticating
                         ? SizedBox()
                         : QrLoginButton(
@@ -233,6 +273,7 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
                               attemptLoginWithOtp(host: host, token: token);
                             },
                           ),
+                       
                   ].expand((widget) => [widget, const SizedBox(height: 12)]),
                 ],
               ),

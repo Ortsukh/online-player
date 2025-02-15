@@ -123,7 +123,7 @@ class _SongsScreenState extends State<SongsScreen> {
               controller: _scrollController,
               slivers: [
                 AppBar(
-                  headingText: 'All songs',
+                  headingText: 'Bütün yırlar',
                   actions: [
                     SortButton(
                       fields: ['title', 'artist_name', 'created_at'],

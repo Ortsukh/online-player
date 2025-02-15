@@ -103,7 +103,7 @@ class _PlaylistDetailsScreen extends State<PlaylistDetailsScreen> {
                         padding: EdgeInsets.only(top: 32),
                         child: Center(
                           child: Text(
-                            'The playlist is empty.',
+                            'Pleylist boş.',
                             style: TextStyle(color: Colors.white54),
                           ),
                         ),

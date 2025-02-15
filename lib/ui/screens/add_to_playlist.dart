@@ -51,8 +51,8 @@ class AddToPlaylistScreen extends StatelessWidget {
                           showOverlay(
                             context,
                             icon: CupertinoIcons.text_badge_plus,
-                            caption: 'Added',
-                            message: 'Item added to playlist.',
+                            caption: 'qoşmaq',
+                            message: 'Pleylistke qoşmaq.',
                           );
                         },
                       );
@@ -66,7 +66,7 @@ class AddToPlaylistScreen extends StatelessWidget {
           },
           child: CupertinoSliverNavigationBar(
             backgroundColor: AppColors.staticScreenHeaderBackground,
-            largeTitle: const LargeTitle(text: 'Add to a Playlist'),
+            largeTitle: const LargeTitle(text: 'Pleylistke qoşmaq'),
             trailing: IconButton(
               onPressed: () => router.showCreatePlaylistSheet(context),
               icon: const Icon(CupertinoIcons.add_circled),

@@ -64,15 +64,15 @@ class _AddPlaylistScreenState extends State<CreatePlaylistSheet> {
 
       if (ok) {
         Navigator.of(context).pop();
-        showOverlay(context, caption: 'Playlist added');
+        showOverlay(context, caption: 'Playlist qoşuldı');
       } else {
         showCupertinoDialog(
           context: context,
           builder: (BuildContext context) {
             return CupertinoAlertDialog(
-              title: const Text('Uh oh'),
+              title: const Text('Tır mır'),
               content: const Text(
-                'Something wrong happened. Please try again.',
+                'SBir şey oldu. Yapınız soñra..',
               ),
               actions: <Widget>[
                 CupertinoDialogAction(
@@ -111,7 +111,7 @@ class _AddPlaylistScreenState extends State<CreatePlaylistSheet> {
                   enabledBorder: inputBorder,
                   focusedBorder: inputBorder,
                   fillColor: Colors.transparent,
-                  hintText: 'Playlist name',
+                  hintText: 'Pleylistnin adı',
                 ),
               ),
               const SizedBox(height: 24.0),
@@ -120,7 +120,7 @@ class _AddPlaylistScreenState extends State<CreatePlaylistSheet> {
                   : ElevatedButton(
                       key: CreatePlaylistSheet.submitButtonKey,
                       onPressed: _enabled ? () async => await submit() : null,
-                      child: const Text('Save'),
+                      child: const Text('Qorumaq'),
                     ),
             ],
           ),

@@ -45,7 +45,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'No downloaded songs',
+                        'Fayllar yoq',
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 16.0),
@@ -54,7 +54,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                         text: const TextSpan(
                           style: TextStyle(color: Colors.white54),
                           children: <InlineSpan>[
-                            TextSpan(text: 'Tap the'),
+                            TextSpan(text: 'resimge basıñız'),
                             WidgetSpan(
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -65,8 +65,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                               ),
                             ),
                             TextSpan(
-                              text: 'icon next to a song to download it for '
-                                  'offline playback.',
+                              text: 'Faylnı almaq içün.',
                             ),
                           ],
                         ),
@@ -75,7 +74,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                         const SizedBox(height: 16.0),
                         ElevatedButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text('Go back'),
+                          child: Text('Artqa'),
                         ),
                       ],
                     ],
@@ -95,7 +94,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
               child: CustomScrollView(
                 slivers: <Widget>[
                   AppBar(
-                    headingText: 'Downloaded',
+                    headingText: 'Fayllar',
                     coverImage: _cover,
                     actions: [
                       SortButton(

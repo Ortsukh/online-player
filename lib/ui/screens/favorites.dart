@@ -71,7 +71,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               ),
               const SizedBox(height: 16.0),
               Text(
-                'No favorites',
+                'Sevimli  yırlar yoq',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16.0),
@@ -80,7 +80,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 text: const TextSpan(
                   style: TextStyle(color: Colors.white54),
                   children: <InlineSpan>[
-                    TextSpan(text: 'Tap the'),
+                    TextSpan(text: 'Resimge basıñız'),
                     WidgetSpan(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -131,7 +131,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       ? <Widget>[emptyWidget]
                       : <Widget>[
                           AppBar(
-                            headingText: 'Favorites',
+                            headingText: 'Sevimli',
                             coverImage: cover,
                             actions: [
                               SortButton(

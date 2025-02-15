@@ -14,7 +14,7 @@ class LyricsPane extends StatelessWidget {
         ? const Padding(
             padding: const EdgeInsets.only(top: 16),
             child: const Text(
-              'No lyrics available.',
+              'Metin yoq.',
               style: const TextStyle(color: Colors.white54),
             ),
           )

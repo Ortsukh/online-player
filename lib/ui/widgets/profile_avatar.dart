@@ -18,14 +18,14 @@ class ProfileAvatar extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: const Text('Log out?'),
+          title: const Text('Çıqış?'),
           actions: <Widget>[
             CupertinoDialogAction(
-              child: const Text('Cancel'),
+              child: const Text('Red etmek'),
               onPressed: () => Navigator.pop(context),
             ),
             CupertinoDialogAction(
-              child: const Text('Confirm'),
+              child: const Text('Yapmaq'),
               isDestructiveAction: true,
               onPressed: () async {
                 await context.read<AuthProvider>().logout();
@@ -62,12 +62,12 @@ class ProfileAvatar extends StatelessWidget {
       itemBuilder: (_) => [
         const PopupMenuItem(
           value: ProfileAvatarMenuItems.clearDownloads,
-          child: Text('Clear downloads'),
+          child: Text('Fayllarnı temizlemek '),
         ),
         const PopupMenuDivider(height: .5),
         const PopupMenuItem(
           value: ProfileAvatarMenuItems.logout,
-          child: Text('Log out'),
+          child: Text('Çıqış'),
         ),
       ],
     );

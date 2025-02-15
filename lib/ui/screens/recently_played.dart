@@ -78,7 +78,7 @@ class _RecentlyPlayedScreenState extends State<RecentlyPlayedScreen> {
                         size: 96.0,
                         color: Colors.white30,
                       ),
-                      const Text('You have not played any songs yet.'),
+                      const Text('Sen da bir şeyni diñlemediñ.'),
                     ],
                   ),
                 ),
@@ -92,7 +92,7 @@ class _RecentlyPlayedScreenState extends State<RecentlyPlayedScreen> {
             return CustomScrollView(
               slivers: <Widget>[
                 AppBar(
-                  headingText: 'Recently Played',
+                  headingText: 'Yaqında diñlenilgen',
                   coverImage: _cover,
                 ),
                 SliverToBoxAdapter(

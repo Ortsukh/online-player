@@ -49,14 +49,14 @@ class _QueueScreenState extends State<QueueScreen> with StreamSubscriber {
         child: CustomScrollView(
           slivers: <Widget>[
             AppBar(
-              headingText: 'Current Queue',
+              headingText: 'Cedvel',
               coverImage: CoverImageStack(playables: _playables),
               actions: <Widget>[
                 if (_playables.isNotEmpty)
                   TextButton(
                     onPressed: () async => await audioHandler.clearQueue(),
                     child: const Text(
-                      'Clear',
+                      'Silmek',
                       style: const TextStyle(color: Colors.red),
                     ),
                   ),
@@ -69,7 +69,7 @@ class _QueueScreenState extends State<QueueScreen> with StreamSubscriber {
                     const SizedBox(height: 128),
                     Center(
                       child: const Text(
-                        'No items queued.',
+                        'Cedvel boş.',
                         style: TextStyle(color: Colors.white54),
                       ),
                     ),

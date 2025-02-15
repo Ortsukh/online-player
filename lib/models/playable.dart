@@ -51,7 +51,8 @@ abstract class Playable<T> {
     return image is CachedNetworkImageProvider &&
         !(image as CachedNetworkImageProvider)
             .url
-            .endsWith('/default-image.webp');
+            // .endsWith('/default-image.webp');
+            .endsWith('/logoNew.png');
   }
 
   String get host {

@@ -54,10 +54,10 @@ class _InfoSheetState extends State<InfoSheet> {
               elevation: 0,
               bottom: TabBar(
                 tabs: [
-                  if (widget.playable is Song) Tab(text: 'Lyrics'),
-                  if (widget.playable is Song) Tab(text: 'Artist'),
-                  if (widget.playable is Song) Tab(text: 'Album'),
-                  if (widget.playable is Episode) Tab(text: 'Description'),
+                  if (widget.playable is Song) Tab(text: 'Metin'),
+                  if (widget.playable is Song) Tab(text: 'Yırcı'),
+                  if (widget.playable is Song) Tab(text: 'Albom'),
+                  if (widget.playable is Episode) Tab(text: 'Tarif'),
                 ],
               ),
             ),
