@@ -1,4 +1,4 @@
-package phanan.koel.app
+package com.azatteam.qirimlife
 
 import android.os.Build
 import android.os.Bundle
