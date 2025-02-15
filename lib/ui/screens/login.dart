@@ -124,15 +124,24 @@ class _LoginScreenState extends State<LoginScreen> with StreamSubscriber {
 );
 Future<void> _signInWithGoogle() async {
   try {
+    await _googleSignIn.signOut();
     final GoogleSignInAccount? account = await _googleSignIn.signIn();
     if (account != null) {
-      print("User signed in: ${account.displayName}");
+       final GoogleSignInAuthentication auth = await account.authentication;
+      print("User11 signed in: ${account.displayName}");
       print("Email: ${account.email}");
       print("Photo URL: ${account.photoUrl}");
-
+   final String? idToken = auth.idToken;
+      final String? accessToken = auth.accessToken;
+ print("idToken: ${idToken}");
+ print("accessToken: ${accessToken}");
+      if (idToken != null && accessToken != null) {
+        // Отправьте токен на сервер для аутентификации
+        // await _authenticateWithServer(idToken, accessToken);
+      }
       // Здесь можно добавить логику для обработки успешной авторизации
       // Например, отправить данные на сервер или сохранить в локальном хранилище
-      redirectToDataLoadingScreen();
+      // redirectToDataLoadingScreen();
     }
   } catch (error) {
     print("Error signing in with Google: $error");

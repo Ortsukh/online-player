@@ -9,6 +9,8 @@ import 'package:app/ui/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:audio_service/audio_service.dart';
+import 'package:app/main.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -22,13 +24,40 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var _loading = false;
   var _errored = false;
-
+  late final PlayableListScreenProvider _provider;
+    late final PlayableProvider _playableProvider;
   @override
   void initState() {
     super.initState();
+    _provider = context.read();
+      _playableProvider = context.read();
+
     fetchData();
   }
+void _playRandomSong() async {
+  final overviewProvider = context.read<OverviewProvider>();
 
+  if (overviewProvider.mostPlayedSongs.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('No songs available')),
+    );
+    return;
+  }
+
+  // final random = Random();
+  // final randomSong = overviewProvider.mostPlayedSongs[
+  //     random.nextInt(overviewProvider.mostPlayedSongs.length)] as Song;
+
+  // final mediaItem = MediaItem(
+  //   id: randomSong.id,
+  //   title: randomSong.title,
+  // );
+ final songs = await _playableProvider.fetchRandom();
+  // final audioHandler = context.read<AudioHandler>();
+  print("audioHandler: ${audioHandler}");  // Получите audioHandler
+   audioHandler.replaceQueue(songs, shuffle: true);
+
+}
   Future<void> fetchData() async {
     if (_loading) return;
 
@@ -54,6 +83,35 @@ class _HomeScreenState extends State<HomeScreen> {
         if (_errored) return OopsBox(onRetry: fetchData);
 
         final blocks = <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 16, bottom: 8),
+                  child: Text(
+                    'Random Song',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _playRandomSong,
+                    child: const Text('Play Random Song'),
+                    style: ElevatedButton.styleFrom(
+                      // primary: AppColors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           if (overviewProvider.mostPlayedSongs.isNotEmpty)
             HorizontalCardScroller(
               headingText: 'Populâr',
