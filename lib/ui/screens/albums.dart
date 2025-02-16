@@ -83,7 +83,14 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   
+       return WillPopScope(
+      onWillPop: () async {
+        print("onWillPop1");
+        // Возвращаем false, чтобы не закрывать экран
+        return true; // Измените на true, если хотите вернуться на предыдущий экран
+      },
+      child: Scaffold(
       body: GradientDecoratedContainer(
         child: Consumer<AlbumProvider>(
           builder: (_, provider, __) {
@@ -135,7 +142,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
           },
         ),
       ),
-    );
+    ));
   }
 }
 

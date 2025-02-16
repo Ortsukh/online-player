@@ -64,7 +64,16 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return WillPopScope( 
+        onWillPop: () async {
+            ModalRoute? currentRoute = ModalRoute.of(context);
+  if (currentRoute != null) {
+    String? currentRouteName = currentRoute.settings.name;
+    print('Current route: $currentRouteName');
+  }
+        if (!Platform.isAndroid || Navigator.of(context).canPop()) return true;
+        return true;
+      },
       child: Scaffold(
         body: _isOffline
             ? Stack(
@@ -126,11 +135,7 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
       ),
-      onWillPop: () async {
-        if (!Platform.isAndroid || Navigator.of(context).canPop()) return true;
-        MethodChannel('dev.koel.app').invokeMethod('minimize');
-        return false;
-      },
+   
     );
   }
 }

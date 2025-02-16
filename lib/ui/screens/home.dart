@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:app/main.dart';
-
+import 'package:flutter/services.dart';
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
 
@@ -33,6 +33,30 @@ class _HomeScreenState extends State<HomeScreen> {
       _playableProvider = context.read();
 
     fetchData();
+  }
+
+  Future<bool?> _showExitDialog(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (context) => _buildExitDialog(context),
+    );
+  }
+
+  AlertDialog _buildExitDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Please confirm'),
+      content: const Text('Do you want to exit the app?'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(false),
+          child: Text('No'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(true),
+          child: Text('Yes'),
+        ),
+      ],
+    );
   }
 void _playRandomSong() async {
   final overviewProvider = context.read<OverviewProvider>();
@@ -74,12 +98,40 @@ void _playRandomSong() async {
       setState(() => _loading = false);
     }
   }
+  Future<bool> _onWillPop() async {
+    // Here you can add your logic before exiting
+    final shouldExit = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Exit'),
+          content: const Text('Do you want to exit?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () => {
+              Navigator.of(context).pop(false),
+              MethodChannel('dev.koel.app').invokeMethod('minimize'),
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+    return shouldExit ?? false; // Return false if the dialog returns null
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<OverviewProvider>(
-      builder: (_, overviewProvider, __) {
-        if (_loading) return const HomeScreenPlaceholder();
+        return WillPopScope(
+      onWillPop: _onWillPop, 
+      child: Consumer<OverviewProvider>(
+        builder: (_, overviewProvider, __) {
+          if (_loading) return const HomeScreenPlaceholder();
         if (_errored) return OopsBox(onRetry: fetchData);
 
         final blocks = <Widget>[
@@ -211,7 +263,7 @@ void _playRandomSong() async {
           ),
         );
       },
-    );
+    ));
   }
 }
 

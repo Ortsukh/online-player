@@ -7,6 +7,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:app/ui/screens/screens.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = '/search';
@@ -115,77 +116,84 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GradientDecoratedContainer(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              searchField,
-              if (!_initial)
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SimplePlayableList(
-                            playables: _playables, bordered: true),
-                        const SizedBox(height: 32),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: AppDimensions.hPadding,
-                          ),
-                          child: const Heading5(text: 'Albums'),
-                        ),
-                        if (_albums.isEmpty)
-                          noResults
-                        else
-                          HorizontalCardScroller(
-                            cards: _albums.map(
-                              (album) => AlbumCard(album: album),
-                            ),
-                          ),
-                        const SizedBox(height: 32),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: AppDimensions.hPadding,
-                          ),
-                          child: const Heading5(text: 'Artists'),
-                        ),
-                        if (_artists.isEmpty)
-                          noResults
-                        else
-                          HorizontalCardScroller(
-                            cards: _artists.map(
-                              (artist) => ArtistCard(artist: artist),
-                            ),
-                          ),
-                        if (Feature.podcasts.isSupported()) ...[
-                          const SizedBox(height: 32),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: AppDimensions.hPadding,
-                            ),
-                            child: const Heading5(text: 'Podcasts'),
-                          ),
-                          if (_podcasts.isEmpty)
-                            noResults
-                          else
-                            HorizontalCardScroller(
-                              cards: _podcasts.map(
-                                (podcast) => PodcastCard(podcast: podcast),
+    return WillPopScope(
+        onWillPop: () async {
+          await Navigator.of(context).push(CupertinoPageRoute(
+            builder: (_) => const HomeScreen(),
+          ));
+          return true;
+        },
+        child: Scaffold(
+          body: GradientDecoratedContainer(
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  searchField,
+                  if (!_initial)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SimplePlayableList(
+                                playables: _playables, bordered: true),
+                            const SizedBox(height: 32),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: AppDimensions.hPadding,
                               ),
+                              child: const Heading5(text: 'Albums'),
                             ),
-                        ],
-                        const BottomSpace(asSliver: false),
-                      ],
+                            if (_albums.isEmpty)
+                              noResults
+                            else
+                              HorizontalCardScroller(
+                                cards: _albums.map(
+                                  (album) => AlbumCard(album: album),
+                                ),
+                              ),
+                            const SizedBox(height: 32),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: AppDimensions.hPadding,
+                              ),
+                              child: const Heading5(text: 'Artists'),
+                            ),
+                            if (_artists.isEmpty)
+                              noResults
+                            else
+                              HorizontalCardScroller(
+                                cards: _artists.map(
+                                  (artist) => ArtistCard(artist: artist),
+                                ),
+                              ),
+                            if (Feature.podcasts.isSupported()) ...[
+                              const SizedBox(height: 32),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: AppDimensions.hPadding,
+                                ),
+                                child: const Heading5(text: 'Podcasts'),
+                              ),
+                              if (_podcasts.isEmpty)
+                                noResults
+                              else
+                                HorizontalCardScroller(
+                                  cards: _podcasts.map(
+                                    (podcast) => PodcastCard(podcast: podcast),
+                                  ),
+                                ),
+                            ],
+                            const BottomSpace(asSliver: false),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-            ],
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

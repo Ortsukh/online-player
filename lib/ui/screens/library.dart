@@ -75,56 +75,63 @@ class LibraryScreen extends StatelessWidget {
       ],
     ).toList();
 
-    return Scaffold(
-      body: CupertinoTheme(
-        data: CupertinoThemeData(primaryColor: Colors.white),
-        child: GradientDecoratedContainer(
-          child: CustomScrollView(
-            slivers: <Widget>[
-              const CupertinoSliverNavigationBar(
-                backgroundColor: AppColors.staticScreenHeaderBackground,
-                largeTitle: const LargeTitle(text: 'Katalog'),
+    return WillPopScope(
+        onWillPop: () async {
+          await Navigator.of(context).push(CupertinoPageRoute(
+            builder: (_) => const HomeScreen(),
+          ));
+          return true;
+        },
+        child: Scaffold(
+          body: CupertinoTheme(
+            data: CupertinoThemeData(primaryColor: Colors.white),
+            child: GradientDecoratedContainer(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  const CupertinoSliverNavigationBar(
+                    backgroundColor: AppColors.staticScreenHeaderBackground,
+                    largeTitle: const LargeTitle(text: 'Katalog'),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate(menuItems),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(
+                      AppDimensions.hPadding,
+                      24,
+                      AppDimensions.hPadding,
+                      0,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: const Heading5(text: 'Soñki qoşulğan'),
+                    ),
+                  ),
+                  recentlyAddedSongs.isEmpty
+                      ? const SliverToBoxAdapter(child: SizedBox.shrink())
+                      : SliverPlayableList(playables: recentlyAddedSongs),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(
+                      AppDimensions.hPadding,
+                      24,
+                      AppDimensions.hPadding,
+                      0,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: const Heading5(text: 'Populâr'),
+                    ),
+                  ),
+                  mostPlayedSongs.isEmpty
+                      ? const SliverToBoxAdapter(child: SizedBox.shrink())
+                      : SliverPlayableList(playables: mostPlayedSongs),
+                  const BottomSpace(),
+                ],
               ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                sliver: SliverList(
-                  delegate: SliverChildListDelegate(menuItems),
-                ),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppDimensions.hPadding,
-                  24,
-                  AppDimensions.hPadding,
-                  0,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: const Heading5(text: 'Soñki qoşulğan'),
-                ),
-              ),
-              recentlyAddedSongs.isEmpty
-                  ? const SliverToBoxAdapter(child: SizedBox.shrink())
-                  : SliverPlayableList(playables: recentlyAddedSongs),
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppDimensions.hPadding,
-                  24,
-                  AppDimensions.hPadding,
-                  0,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: const Heading5(text: 'Populâr'),
-                ),
-              ),
-              mostPlayedSongs.isEmpty
-                  ? const SliverToBoxAdapter(child: SizedBox.shrink())
-                  : SliverPlayableList(playables: mostPlayedSongs),
-              const BottomSpace(),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 

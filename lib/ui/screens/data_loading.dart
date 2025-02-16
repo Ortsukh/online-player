@@ -34,9 +34,14 @@ class _DataLoadingScreen extends State<DataLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GradientDecoratedContainer(
-        child: _hasError
+    return WillPopScope(
+      onWillPop: () async {
+        print("onWillPop2");
+        return false; // Измените на true, если хотите вернуться на предыдущий экран
+      },
+      child: Scaffold(
+        body: GradientDecoratedContainer(
+          child: _hasError
             ? OopsBox(
                 showLogOutButton: true,
                 onRetry: () {
@@ -46,6 +51,6 @@ class _DataLoadingScreen extends State<DataLoadingScreen> {
               )
             : const ContainerWithSpinner(),
       ),
-    );
+    ));
   }
 }
