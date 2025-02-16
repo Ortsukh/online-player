@@ -225,7 +225,17 @@ void _playRandomSong() async {
               onRefresh: () => context.read<OverviewProvider>().refresh(),
               child: CustomScrollView(
                 slivers: overviewProvider.isEmpty
-                    ? [SliverToBoxAdapter(child: const EmptyHomeScreen())]
+                    ? [CupertinoSliverNavigationBar(
+                          backgroundColor:
+                              AppColors.staticScreenHeaderBackground,
+                          largeTitle: const Text(''),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const ProfileAvatar(),
+                            ],
+                          ),
+                        ),SliverToBoxAdapter(child: const EmptyHomeScreen())]
                     : <Widget>[
                         CupertinoSliverNavigationBar(
                           backgroundColor:
